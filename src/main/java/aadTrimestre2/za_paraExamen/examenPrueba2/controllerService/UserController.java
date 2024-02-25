@@ -11,7 +11,6 @@ import java.util.Set;
 
 public class UserController {
     private final UserDAOimpl userDAOimpl = new UserDAOimpl();
-    private final LibroController libroController = new LibroController();
 
 
     //metodos
