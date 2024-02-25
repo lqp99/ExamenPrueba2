@@ -61,6 +61,7 @@ public class Main {
         //comentar/valorar un libro:
         userController.comentarLibro(u1, libro1, 4, "Un libro que cuenta una historia real, muy bonita y de superación. Muy descriptivo.");
         userController.comentarLibro(u2, libro1, 5, "Un libro increible y muy bonito.");
+        userController.comentarLibro(u2, libro3, 7, "Este libro es una locuraaaa.");
 
     }
 }
