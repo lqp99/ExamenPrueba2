@@ -1,16 +1,17 @@
 package aadTrimestre2.za_paraExamen.examenPrueba2.controllerService;
 
-import aadTrimestre2.za_paraExamen.examenPrueba2.implementations.UserDAOimpl;
+import aadTrimestre2.za_paraExamen.examenPrueba2.impl.LibroDAOimpl;
+import aadTrimestre2.za_paraExamen.examenPrueba2.impl.UserDAOimpl;
 import aadTrimestre2.za_paraExamen.examenPrueba2.modelPojo.Libro;
 import aadTrimestre2.za_paraExamen.examenPrueba2.modelPojo.User;
 import aadTrimestre2.za_paraExamen.examenPrueba2.modelPojo.Valoracion;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Calendar;
 import java.util.Set;
 
 public class UserController {
     private final UserDAOimpl userDAOimpl = new UserDAOimpl();
+    private final LibroDAOimpl libroDAOimpl = new LibroDAOimpl();
 
 
     //metodos
@@ -28,12 +29,14 @@ public class UserController {
     }
 
     public void updateUser(User user) {
-        this.userDAOimpl.updateUser(user);
+        User userDB = this.userDAOimpl.getUserById(user.getId());
+        this.userDAOimpl.updateUser(userDB);
         System.out.println("User con nombre \"" + user.getName() + "\" actualizado.");
     }
 
     public void removeUser(User user){
-        this.userDAOimpl.removeUser(user);
+        User userDB = this.userDAOimpl.getUserById(user.getId());
+        this.userDAOimpl.removeUser(userDB);
         System.out.println("User con nombre \"" + user.getName() + "\" eliminado.");
     }
 
@@ -41,7 +44,7 @@ public class UserController {
         User user = this.userDAOimpl.getUserByNameOrMail(userNameOrMail);
 
         if (user != null && user.getPassword().equals(password)){
-            user.setLastTimeLogin(LocalDate.now());  //para actualizar la ultima vez que se hizo login a ahora.
+            user.setLastTimeLogin(Calendar.getInstance());  //para actualizar la ultima vez que se hizo login a ahora.
             return user;
             //return true;
         } else {
@@ -51,9 +54,12 @@ public class UserController {
     }
 
     public void marcarComoLeido(User user, Libro libro) {
+        //User userDB = this.userDAOimpl.getUserById(user.getId());
+        //Libro libroDB = this.libroDAOimpl.getLibroById(libro.getId());
+
         user.getLibrosLeidos().add(libro);  //en user, cogemos la lista que tiene de libros leidos y añadimos el libro que nos pasan.
 
-        libro.getPersonasQueHanLeidoEsteLibro().add(user);  //en libro, cogemos la lista que tiene de personas que han leido este libro y añadimos el usuario que nos pasan.
+        //libroDB.getPersonasQueHanLeidoEsteLibro().add(userDB);  //en libro, cogemos la lista que tiene de personas que han leido este libro y añadimos el usuario que nos pasan.
 
         this.userDAOimpl.updateUser(user);  //actualizamos el usuario para que se guarden los cambios.
 
@@ -61,6 +67,8 @@ public class UserController {
     }
 
     public void escribirLibro(User user, String titulo, int numeroPaginas) {
+        //User userDB = this.userDAOimpl.getUserById(user.getId());
+
         Libro libro = new Libro(titulo, numeroPaginas);
 
         user.getLibrosEscritos().add(libro);  //en user, cogemos la lista que tiene de libros escritos y añadimos el libro que se crea.

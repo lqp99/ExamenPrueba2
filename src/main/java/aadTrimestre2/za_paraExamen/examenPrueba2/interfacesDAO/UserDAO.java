@@ -9,6 +9,7 @@ public interface UserDAO {
     public void createUser(User user);
     public void updateUser(User user);
     public void removeUser(User user);
+    public User getUserById(long userId);
     public User getUserByNameOrMail(String userName);
     public List<Libro> getUserWrittenBooks(User user);
 }

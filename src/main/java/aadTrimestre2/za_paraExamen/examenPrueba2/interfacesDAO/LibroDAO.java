@@ -8,5 +8,6 @@ public interface LibroDAO {
     public void createBook(Libro libro);
     public void updateBook(Libro libro);
     public void removeBook(Libro libro);
+    public Libro getLibroById(long libroId);
     public List<Libro> getAllBooks();
 }

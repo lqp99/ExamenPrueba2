@@ -3,10 +3,7 @@ package aadTrimestre2.za_paraExamen.examenPrueba2.modelPojo;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity  //define que es una entidad dentro de una database.
 @Table(
@@ -52,7 +49,7 @@ public class User {
             //unique = true,  //individualmente no se puede repetir este atributo.
             nullable = false  //no puede ser null.
     )
-    private LocalDate lastTimeLogin;
+    private Calendar lastTimeLogin;
 
     @ManyToMany(  //muchos a muchos.
             mappedBy = "autores",  //mapeamos el valor de la variable de la otra clase que hace la relación con esta clase.
@@ -70,7 +67,7 @@ public class User {
             //fetch = FetchType.LAZY,
             //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todos los posts que tiene el user. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
             //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
-            cascade = {  //al ser "CascadeType.REMOVE" cada vez que se actualice un "Objeto", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
+            cascade = {  //al ser "CascadeType.MERGE" cada vez que se actualice un "Objeto", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
                     CascadeType.MERGE
             }
     )
@@ -78,6 +75,9 @@ public class User {
 
     @OneToMany(  //uno a muchos.
             mappedBy = "autorValoracion",  //mapeamos el valor de la variable de la otra clase que hace la relación con esta clase.
+            //fetch = FetchType.LAZY,
+            //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todos los posts que tiene el user. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
+            //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
             cascade = {  //al ser "CascadeType.PERSIST / MERGE" cada vez que se cree y actualice un "ObjetoDeEstaClase", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
                     CascadeType.PERSIST,
                     CascadeType.MERGE
@@ -94,7 +94,7 @@ public class User {
 //        this.name = name;
 //        this.mail = mail;
 //        this.password = password;
-//        this.lastTimeLogin = LocalDate.now();  //para poner la ultima vez que el user se logeó.
+//        this.lastTimeLogin = Calendar.getInstance();  //para poner la ultima vez que el user se logeó a la hora de ahora mismo.
 //    }
 
     public User(String name, String mail, String userName, String password) {
@@ -102,7 +102,7 @@ public class User {
         this.mail = mail;
         this.userName = userName;
         this.password = password;
-        this.lastTimeLogin = LocalDate.now();  //para poner la ultima vez que el user se logeó.
+        this.lastTimeLogin = Calendar.getInstance();  //para poner la ultima vez que el user se logeó a la hora de ahora mismo.
     }
 
 
@@ -159,11 +159,11 @@ public class User {
         this.password = password;
     }
 
-    public LocalDate getLastTimeLogin() {
+    public Calendar getLastTimeLogin() {
         return lastTimeLogin;
     }
 
-    public void setLastTimeLogin(LocalDate lastTimeLogin) {
+    public void setLastTimeLogin(Calendar lastTimeLogin) {
         this.lastTimeLogin = lastTimeLogin;
     }
 
@@ -190,4 +190,6 @@ public class User {
     public void setValoraciones(Set<Valoracion> valoraciones) {
         this.valoraciones = valoraciones;
     }
+
+
 }

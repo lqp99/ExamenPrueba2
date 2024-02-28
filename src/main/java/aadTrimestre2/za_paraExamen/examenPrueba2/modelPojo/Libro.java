@@ -33,13 +33,13 @@ public class Libro {
     private int numeroPaginas;
 
     @ManyToMany (  //muchos a muchos.
+            //fetch = FetchType.LAZY,
+            //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todos los posts que tiene el user. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
+            //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
             /*cascade = {  //al ser "CascadeType.PERSIST / MERGE" cada vez que se cree o actualice un "Objeto", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             }*/
-            //fetch = FetchType.LAZY
-            //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todas las asignaturas que tiene el profesor. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
-            //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
     )
     @JoinTable(  //es la tabla que se genera cuando hay una relacion de muchos a muchos (N:M).
             name = "autores",  //se pone el nombre de la tabla que se crea al hacer la referencia entre las dos clases.
@@ -50,13 +50,13 @@ public class Libro {
     private Set<User> autores = new HashSet<>();
 
     @ManyToMany (  //muchos a muchos.
+            //fetch = FetchType.LAZY,
+            //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todos los posts que tiene el user. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
+            //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
             /*cascade = {  //al ser "CascadeType.PERSIST / MERGE" cada vez que se cree o actualice un "Objeto", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             }*/
-            //fetch = FetchType.LAZY
-            //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todas las asignaturas que tiene el profesor. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
-            //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
     )
     @JoinTable(  //es la tabla que se genera cuando hay una relacion de muchos a muchos (N:M).
             name = "lectura",  //se pone el nombre de la tabla que se crea al hacer la referencia entre las dos clases.
@@ -68,6 +68,9 @@ public class Libro {
 
     @OneToMany(  //uno a muchos.
             mappedBy = "libroValorado",  //mapeamos el valor de la variable de la otra clase que hace la relación con esta clase.
+            //fetch = FetchType.LAZY,
+            //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todos los posts que tiene el user. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
+            //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
             cascade = {  //al ser "CascadeType.PERSIST / MERGE" cada vez que se cree y actualice un "ObjetoDeEstaClase", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
                     CascadeType.PERSIST,
                     CascadeType.MERGE

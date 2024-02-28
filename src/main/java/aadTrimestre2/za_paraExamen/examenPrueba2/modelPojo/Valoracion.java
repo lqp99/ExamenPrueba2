@@ -28,18 +28,24 @@ public class Valoracion {
     private String comentario;
 
     @ManyToOne(  //muchos a uno.
-            cascade = {  //al ser "CascadeType.PERSIST / MERGE" cada vez que se cree y actualice un "ObjetoDeEstaClase", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
+            //fetch = FetchType.LAZY,
+            //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todos los posts que tiene el user. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
+            //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
+            /*cascade = {  //al ser "CascadeType.PERSIST / MERGE" cada vez que se cree y actualice un "ObjetoDeEstaClase", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
                     CascadeType.PERSIST,
                     CascadeType.MERGE
-            }
+            }*/
     )
     private User autorValoracion;
 
     @ManyToOne(  //muchos a uno.
-            cascade = {  //al ser "CascadeType.PERSIST / MERGE" cada vez que se cree y actualice un "ObjetoDeEstaClase", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
+            //fetch = FetchType.LAZY,
+            //El FetchType.EAGER: cuando se hace un select te trae ttodo lo que tiene que ver con esta clase. Te va a traer todos los posts que tiene el user. Cuando te da un ERROR de que hay muchas llmadas se pone LAZY y se arregla.
+            //El FetchType.LAZY: por defecto si no pones nada es este. Cuando se hace un select te trae ttodo lo que tiene que ver con esta clase menos las asignaturas y así controlas lo que te devuelve. Hay que crear un método para saber cuales asignatruas son las que están relacionadas con cada profesor.
+            /*cascade = {  //al ser "CascadeType.PERSIST / MERGE" cada vez que se cree y actualice un "ObjetoDeEstaClase", se hace en cascada y se modifica la referencia primero esta clase y luego en la que está referenciada.
                     CascadeType.PERSIST,
                     CascadeType.MERGE
-            }
+            }*/
     )
     private Libro libroValorado;
 
